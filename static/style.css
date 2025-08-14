@@ -1,10 +1,9 @@
 /* 全体のフォントや背景色を設定 */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap' );
+
 body {
-    /* Googleフォントから丸みのあるフォントを読み込む（オプション） */
-    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap' );
-    
-    font-family: 'M PLUS Rounded 1c', sans-serif; /* 丸ゴシック系のフォントを指定 */
-    background-color: #fdf6e6; /* 背景を優しいベージュに */
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    background-color: #fdf6e6;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,13 +15,13 @@ body {
 #chat-container {
     width: 90%;
     max-width: 500px;
-    height: 85vh; /* 少し高さを大きく */
+    height: 85vh;
     background-color: #ffffff;
-    border-radius: 20px; /* 角をより丸く */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 影を少し柔らかく */
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    border: 1px solid #fde2e4; /* 細いピンクの枠線 */
+    border: 1px solid #fde2e4;
 }
 
 /* ヘッダー（タイトル）のスタイル */
@@ -30,11 +29,11 @@ h1 {
     text-align: center;
     padding: 20px;
     margin: 0;
-    border-bottom: 1px solid #fde2e4; /* 区切り線もピンクに */
+    border-bottom: 1px solid #fde2e4;
     font-size: 1.3em;
-    color: #e57373; /* タイトルの文字色を少し濃いピンクに */
-    background-color: #fff8f9; /* ヘッダー背景をほんのりピンクに */
-    border-radius: 20px 20px 0 0; /* 上の角だけ丸く */
+    color: #e57373;
+    background-color: #fff8f9;
+    border-radius: 20px 20px 0 0;
 }
 
 /* チャットの会話ログ部分 */
@@ -42,41 +41,14 @@ h1 {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
-    background-color: #fffaf5; /* 会話部分の背景を少しクリーム色に */
-}
-
-/* メッセージ吹き出しの共通スタイル */
-.message {
-    margin-bottom: 15px;
-    padding: 12px 18px;
-    border-radius: 22px; /* 吹き出しの丸み */
-    max-width: 80%;
-    line-height: 1.5;
-    position: relative; /* 吹き出しのしっぽ用に */
-}
-
-/* ユーザー（自分）のメッセージ吹き出し */
-.message.user {
-    background-color: #ffcdd2; /* ユーザーの吹き出しをピンクに */
-    color: #5d4037; /* 文字色をダークブラウンに */
-    align-self: flex-end;
-    margin-left: auto;
-    border-bottom-right-radius: 5px; /* 右下の角を少し尖らせる */
-}
-
-/* ボット（相手）のメッセージ吹き出し */
-.message.bot {
-    background-color: #fefae0; /* 優しいハニーイエロー */
-    color: #606c38; /* 文字色をオリーブグリーンに */
-    align-self: flex-start;
-    border-bottom-left-radius: 5px; /* 左下の角を少し尖らせる */
+    background-color: #fffaf5;
 }
 
 /* 「考え中...」の表示 */
 #loading {
     text-align: center;
     padding: 10px;
-    color: #c5a6a9; /* ローディング文字もピンク系に */
+    color: #c5a6a9;
     font-weight: bold;
 }
 
@@ -84,29 +56,28 @@ h1 {
 #chat-form {
     display: flex;
     padding: 20px;
-    background-color: #fff8f9; /* フッターもほんのりピンクに */
+    background-color: #fff8f9;
     border-top: 1px solid #fde2e4;
-    border-radius: 0 0 20px 20px; /* 下の角だけ丸く */
+    border-radius: 0 0 20px 20px;
 }
 
 /* 入力ボックス */
 #user-input {
     flex-grow: 1;
-    border: 2px solid #fde2e4; /* 枠線をピンクに */
+    border: 2px solid #fde2e4;
     border-radius: 20px;
     padding: 12px 18px;
     font-size: 1em;
-    outline: none; /* クリックしたときの青い枠線を消す */
-    transition: border-color 0.3s; /* 変化を滑らかに */
+    outline: none;
+    transition: border-color 0.3s;
 }
-/* 入力ボックスをクリックしたとき */
 #user-input:focus {
-    border-color: #ffb6c1; /* 枠線のピンクを少し濃くする */
+    border-color: #ffb6c1;
 }
 
 /* 送信ボタン */
 #chat-form button {
-    background-color: #ffb6c1; /* ボタンの色をライトピンクに */
+    background-color: #ffb6c1;
     color: white;
     font-weight: bold;
     border: none;
@@ -114,12 +85,83 @@ h1 {
     padding: 12px 25px;
     margin-left: 10px;
     cursor: pointer;
-    transition: background-color 0.3s; /* 変化を滑らかに */
+    transition: background-color 0.3s;
 }
-/* ボタンにマウスカーソルを乗せたとき */
 #chat-form button:hover {
-    background-color: #f7cac9; /* 少し濃いピンクに */
+    background-color: #f7cac9;
 }
+
+
+/* =============================================== */
+/* アイコン表示用の追加スタイル (ユーザー対応版) */
+/* =============================================== */
+
+/* アイコンと吹き出しを横並びにするための行コンテナ */
+.message-row {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    max-width: 90%;
+}
+
+/* ユーザー（自分）のメッセージ行は、右寄せにする */
+.message-row.user {
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+/* ボット（相手）のメッセージ行は、左寄せにする */
+.message-row.bot {
+    justify-content: flex-start;
+    margin-right: auto;
+}
+
+/* アイコン画像の共通スタイル */
+.avatar-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+/* ボットのアイコンは右側に余白 */
+.message-row.bot .avatar-icon {
+    margin-right: 12px;
+}
+
+/* ユーザーのアイコンは左側に余白 */
+.message-row.user .avatar-icon {
+    margin-left: 12px;
+}
+
+/* 吹き出し自体のマージンは不要なのでリセット */
+.message {
+    margin-bottom: 0;
+    padding: 12px 18px;
+    border-radius: 22px;
+    line-height: 1.5;
+    position: relative;
+    white-space: pre-wrap; /* ★改行を正しく表示するための設定 */
+}
+
+/* ユーザーの吹き出しのスタイル */
+.message-row.user .message {
+    background-color: #ffcdd2;
+    color: #5d4037;
+    border-bottom-right-radius: 5px;
+}
+
+/* ボットの吹き出しのスタイル */
+.message-row.bot .message {
+    /* ここは、あなたが選んだボットの吹き出し色に合わせてください */
+    background-color: #fefae0; /* 優しいハニーイエロー */
+    color: #606c38; /* 文字色をオリーブグリーンに */
+    border-bottom-left-radius: 5px;
+}
+
+
 
 /* =============================================== */
 /* スマートフォン用のスタイル（レスポンシブ対応） */
@@ -127,24 +169,18 @@ h1 {
 /* =============================================== */
 @media (max-width: 600px) {
 
-    /* チャット入力フォームのレイアウトを調整 */
     #chat-form {
-        padding: 15px; /* 少し余白を詰める */
+        padding: 15px;
     }
 
-    /* 入力ボックスのスタイル */
     #user-input {
-        padding: 10px 15px; /* 少し小さくする */
-        font-size: 0.95em; /* 文字も少し小さく */
+        padding: 10px 15px;
+        font-size: 0.95em;
     }
 
-    /* 送信ボタンのスタイル */
     #chat-form button {
-        padding: 10px 15px; /* ボタンの左右の余白を調整 */
-        margin-left: 8px; /* ボタンの左の隙間を詰める */
-        
-        /* ★★★ここが重要★★★ */
-        /* ボタンの幅が文字より狭くならないようにする */
+        padding: 10px 15px;
+        margin-left: 8px;
         white-space: nowrap; 
     }
 }

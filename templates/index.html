@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aivis花音ちゃん</title>
+    <title>メイドAI「花音」</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div id="chat-container">
-        <h1>Aivis花音ちゃん</h1>
+        <h1>メイドAI「花音」</h1>
         <div id="chat-log">
-            <div class="message bot">やっほー、お話しよっか♪</div>
+            <!-- 初期メッセージ -->
+            <div class="message-row bot">
+                <img src="{{ url_for('static', filename='kanon_icon.png') }}" class="avatar-icon">
+                <div class="message">ご指示をどうぞ、ご主人様。</div>
+            </div>
         </div>
-        <div id="loading" style="display: none;">考え中...</div>
+        <div id="loading" style="display: none;">Now Loading...</div>
         <form id="chat-form">
-            <input type="text" id="user-input" placeholder="メッセージを入力してね" autocomplete="off">
+            <input type="text" id="user-input" placeholder="メッセージを入力" autocomplete="off">
             <button type="submit">送信</button>
         </form>
     </div>
@@ -41,7 +45,8 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error('サーバーからの応答がありませんでした。');
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'サーバーからの応答がありませんでした。');
                 }
 
                 const data = await response.json();
@@ -54,7 +59,7 @@
 
             } catch (error) {
                 console.error('エラー:', error);
-                addMessageToLog('エラーが発生しました。もう一度試してください。', 'bot');
+                addMessageToLog(`申し訳ありません、マスター。通信中にエラーが発生した模様です。\n${error.message}`, 'bot');
             } finally {
                 document.getElementById('loading').style.display = 'none';
             }
@@ -62,15 +67,32 @@
 
         function addMessageToLog(text, sender) {
             const chatLog = document.getElementById('chat-log');
+            
+            const messageContainer = document.createElement('div');
+            messageContainer.classList.add('message-row', sender);
+
             const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', sender);
+            messageDiv.classList.add('message');
             messageDiv.textContent = text;
-            chatLog.appendChild(messageDiv);
-            chatLog.scrollTop = chatLog.scrollHeight; // 自動でスクロール
+
+            const icon = document.createElement('img');
+            icon.classList.add('avatar-icon');
+
+            if (sender === 'bot') {
+                icon.src = "{{ url_for('static', filename='kanon_icon.png') }}";
+                messageContainer.appendChild(icon);
+                messageContainer.appendChild(messageDiv);
+            } else {
+                icon.src = "{{ url_for('static', filename='user_icon.png') }}";
+                messageContainer.appendChild(messageDiv);
+                messageContainer.appendChild(icon);
+            }
+            
+            chatLog.appendChild(messageContainer);
+            chatLog.scrollTop = chatLog.scrollHeight;
         }
 
         function playAudio(hexAudioData) {
-            // 16進数文字列をバイト配列に変換
             const bytes = new Uint8Array(hexAudioData.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
             const blob = new Blob([bytes], { type: 'audio/wav' });
             const url = URL.createObjectURL(blob);
