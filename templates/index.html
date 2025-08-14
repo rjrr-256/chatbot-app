@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aivis花音ちゃん</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="chat-container">
+        <h1>Aivis花音ちゃん</h1>
+        <div id="chat-log">
+            <div class="message bot">お帰りなさい～何話そっか♪</div>
+        </div>
+        <div id="loading" style="display: none;">考え中...</div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="メッセージを入力..." autocomplete="off">
+            <button type="submit">送信</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', async function(e) {
+            e.preventDefault(); // フォームのデフォルト送信をキャンセル
+
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // ユーザーのメッセージをチャットログに追加
+            addMessageToLog(message, 'user');
+            userInput.value = '';
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                // サーバーにメッセージを送信
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+
+                if (!response.ok) {
+                    throw new Error('サーバーからの応答がありませんでした。');
+                }
+
+                const data = await response.json();
+
+                // AIの返答をチャットログに追加
+                addMessageToLog(data.text, 'bot');
+
+                // 受け取った音声データを再生
+                playAudio(data.audio_data);
+
+            } catch (error) {
+                console.error('エラー:', error);
+                addMessageToLog('エラーが発生しました。もう一度試してください。', 'bot');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        });
+
+        function addMessageToLog(text, sender) {
+            const chatLog = document.getElementById('chat-log');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            messageDiv.textContent = text;
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight; // 自動でスクロール
+        }
+
+        function playAudio(hexAudioData) {
+            // 16進数文字列をバイト配列に変換
+            const bytes = new Uint8Array(hexAudioData.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+            const blob = new Blob([bytes], { type: 'audio/wav' });
+            const url = URL.createObjectURL(blob);
+            const audio = new Audio(url);
+            audio.play();
+        }
+    </script>
+</body>
+</html>

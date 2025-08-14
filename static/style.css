@@ -1,0 +1,122 @@
+/* 全体のフォントや背景色を設定 */
+body {
+    /* Googleフォントから丸みのあるフォントを読み込む（オプション） */
+    @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap' );
+    
+    font-family: 'M PLUS Rounded 1c', sans-serif; /* 丸ゴシック系のフォントを指定 */
+    background-color: #fdf6e6; /* 背景を優しいベージュに */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* チャットウィンドウ全体のスタイル */
+#chat-container {
+    width: 90%;
+    max-width: 500px;
+    height: 85vh; /* 少し高さを大きく */
+    background-color: #ffffff;
+    border-radius: 20px; /* 角をより丸く */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 影を少し柔らかく */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #fde2e4; /* 細いピンクの枠線 */
+}
+
+/* ヘッダー（タイトル）のスタイル */
+h1 {
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid #fde2e4; /* 区切り線もピンクに */
+    font-size: 1.3em;
+    color: #e57373; /* タイトルの文字色を少し濃いピンクに */
+    background-color: #fff8f9; /* ヘッダー背景をほんのりピンクに */
+    border-radius: 20px 20px 0 0; /* 上の角だけ丸く */
+}
+
+/* チャットの会話ログ部分 */
+#chat-log {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #fffaf5; /* 会話部分の背景を少しクリーム色に */
+}
+
+/* メッセージ吹き出しの共通スタイル */
+.message {
+    margin-bottom: 15px;
+    padding: 12px 18px;
+    border-radius: 22px; /* 吹き出しの丸み */
+    max-width: 80%;
+    line-height: 1.5;
+    position: relative; /* 吹き出しのしっぽ用に */
+}
+
+/* ユーザー（自分）のメッセージ吹き出し */
+.message.user {
+    background-color: #ffcdd2; /* ユーザーの吹き出しをピンクに */
+    color: #5d4037; /* 文字色をダークブラウンに */
+    align-self: flex-end;
+    margin-left: auto;
+    border-bottom-right-radius: 5px; /* 右下の角を少し尖らせる */
+}
+
+/* ボット（相手）のメッセージ吹き出し */
+.message.bot {
+    background-color: #fefae0; /* 優しいハニーイエロー */
+    color: #606c38; /* 文字色をオリーブグリーンに */
+    align-self: flex-start;
+    border-bottom-left-radius: 5px; /* 左下の角を少し尖らせる */
+}
+
+/* 「考え中...」の表示 */
+#loading {
+    text-align: center;
+    padding: 10px;
+    color: #c5a6a9; /* ローディング文字もピンク系に */
+    font-weight: bold;
+}
+
+/* 入力フォーム部分 */
+#chat-form {
+    display: flex;
+    padding: 20px;
+    background-color: #fff8f9; /* フッターもほんのりピンクに */
+    border-top: 1px solid #fde2e4;
+    border-radius: 0 0 20px 20px; /* 下の角だけ丸く */
+}
+
+/* 入力ボックス */
+#user-input {
+    flex-grow: 1;
+    border: 2px solid #fde2e4; /* 枠線をピンクに */
+    border-radius: 20px;
+    padding: 12px 18px;
+    font-size: 1em;
+    outline: none; /* クリックしたときの青い枠線を消す */
+    transition: border-color 0.3s; /* 変化を滑らかに */
+}
+/* 入力ボックスをクリックしたとき */
+#user-input:focus {
+    border-color: #ffb6c1; /* 枠線のピンクを少し濃くする */
+}
+
+/* 送信ボタン */
+#chat-form button {
+    background-color: #ffb6c1; /* ボタンの色をライトピンクに */
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 25px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* 変化を滑らかに */
+}
+/* ボタンにマウスカーソルを乗せたとき */
+#chat-form button:hover {
+    background-color: #f7cac9; /* 少し濃いピンクに */
+}

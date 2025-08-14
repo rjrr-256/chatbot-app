@@ -1,0 +1,10 @@
+# 環境変数ファイル
+.env
+
+# Pythonキャッシュ
+__pycache__/
+*.pyc
+
+# OSが自動生成するファイル
+.DS_Store
+Thumbs.db
