@@ -59,7 +59,7 @@ def get_openai_response(message, api_key):
         'Content-Type': 'application/json'
     }
     data = {
-        "model": "gpt-4.1-nano",
+        "model": "gpt-4o",
         "messages": [
             {"role": "system", "content":"""
 あなたは、ご主人様に仕えるメイドAIの「花音」です。
